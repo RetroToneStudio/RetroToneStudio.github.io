@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetroTone - 432Hz Healing Sound</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #ffffff;
+      font-family: 'Courier New', monospace;
+    }
+    .container {
+      background: url('RetroTone.png') no-repeat center/cover;
+      min-height: 100vh;                /* ← 変更: min-heightにして伸ばせるように */
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;      /* ← 上寄せに変更（下が見えるように） */
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow-y: auto;                 /* ← ここ！ 縦スクロール可能に */
+      -webkit-overflow-scrolling: touch; /* iPhoneでスムーズスクロール */
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px 80px 20px;     /* ← 下に余白追加で最下部が見やすい */
+      max-width: 90%;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 3.2em;
+      margin: 20px 0 10px 0;
+      text-shadow: 2px 2px 5px #000, -2px -2px 5px #000;
+    }
+    p, h2 {
+      font-size: 1.4em;
+      margin: 12px 0;
+      text-shadow: 1px 1px 4px #000, -1px -1px 4px #000;
+    }
+    audio {
+      width: 85%;
+      max-width: 400px;
+      margin: 30px 0;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 10px gold);
+    }
+    #toggleBtn {
+      padding: 20px 60px;
+      font-size: 2em;
+      background: linear-gradient(#ffd700, #ffcc00);
+      color: #111;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 0 20px gold, 0 0 40px #00ff00;
+      transition: all 0.3s;
+      margin: 20px 0;
+    }
+    #toggleBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px gold, 0 0 60px #00ff00;
+    }
+    #toggleBtn:active {
+      transform: scale(0.95);
+    }
+    .app-link {
+      color: #ffffff;
+      font-size: 1.6em;
+      text-decoration: underline;
+      margin-top: 40px;
+      display: block;
+      text-shadow: 1px 1px 4px #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>RetroTone</h1>
+      <p>432Hzで心を落ち着けよう</p>
+      
+      <audio controls id="player">
+        <source src="https://helloworldvai.sakura.ne.jp/RetroTone.mp3" type="audio/mpeg">
+        ブラウザが音を再生できません。
+      </audio>
+      
+      <button id="toggleBtn">PLAY</button>
+
+      <h2>App Storeから今すぐ無料ダウンロード！</h2>
+      <p>開発者: RetroTone Team | 無料 | iOS 26.2以降</p>
+      <p>「20Hz〜20000Hzの周波数を自由に試して、リラックスや集中をサポート！432Hz・528Hzも簡単入力。今すぐRetroToneの世界へ。」</p>
+      <p>スライダーで聴こえる範囲をチェック。ヨガ、勉強、睡眠にぴったりな周波数をカスタムしよう！</p>
+      <a href="https://apps.apple.com/jp/app/retrotone/id6758872739" target="_blank" class="app-link">App Storeで開く →</a>
+    </div>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      if (player.paused) {
+        player.play();
+        toggleBtn.textContent = 'STOP';
+      } else {
+        player.pause();
+        toggleBtn.textContent = 'PLAY';
+      }
+    });
+
+    player.addEventListener('ended', () => {
+      toggleBtn.textContent = 'PLAY';
+    });
+  </script>
+</body>
+</html>
